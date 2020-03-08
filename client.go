@@ -7,9 +7,10 @@ type Client struct {
 	MchId     string
 }
 
-func NewClient(appId, appSecret string) *Client {
+func NewClient(appId, appSecret, mchId string) *Client {
 	return &Client{
 		AppId:     appId,
 		AppSecret: appSecret,
+		MchId:     mchId,
 	}
 }
