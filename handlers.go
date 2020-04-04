@@ -43,8 +43,6 @@ func (c *Client) GetOpenid(code string) (string, error) {
 func (c *Client) GetPrepayId(r GetPrepayIdRequest) (interface{}, error) {
 	url := "https://api.mch.weixin.qq.com/pay/unifiedorder"
 
-	r.AppId = c.AppId
-	r.MchId = c.MchId
 	reqBody, err := xml.Marshal(&r)
 	if err != nil {
 		return nil, err
@@ -95,8 +93,6 @@ func (c *Client) GetPrepayId(r GetPrepayIdRequest) (interface{}, error) {
 func (c *Client) Refund(r RefundRequest) error {
 	url := "https://api.mch.weixin.qq.com/secapi/pay/refund"
 
-	r.AppId = c.AppId
-	r.MchId = c.MchId
 	req, err := xml.Marshal(&r)
 	if err != nil {
 		return err
@@ -142,9 +138,6 @@ func (c *Client) Refund(r RefundRequest) error {
 // 关闭订单
 func (c *Client) CloseOrder(r CloseOrderRequest) error {
 	url := "https://api.mch.weixin.qq.com/pay/closeorder"
-
-	r.AppId = c.AppId
-	r.MchId = c.MchId
 
 	req, err := xml.Marshal(&r)
 	if err != nil {
