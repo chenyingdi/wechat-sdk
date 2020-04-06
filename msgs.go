@@ -80,7 +80,7 @@ type RefundRequest struct {
 	TotalFee    int      `xml:"total_fee"`
 }
 
-func (r *RefundRequest) Init(args ReqArgs) {
+func (r *RefundRequest) Init(args *ReqArgs) {
 	r.AppId = args.AppId
 	r.MchId = args.MchId
 	r.NonceStr = GeneNonceStr(32)
@@ -107,7 +107,7 @@ type CloseOrderRequest struct {
 	OutTradeNo string   `xml:"out_trade_no"`
 }
 
-func (c *CloseOrderRequest) Init(args ReqArgs)  {
+func (c *CloseOrderRequest) Init(args *ReqArgs)  {
 	c.AppId = args.AppId
 	c.MchId = args.MchId
 	c.NonceStr = GeneNonceStr(32)

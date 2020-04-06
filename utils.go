@@ -35,7 +35,9 @@ func GeneSign(args map[string]string, key string) string {
 	stringA = ParseMap(args)
 
 	// 2. 与key拼接得到stringSignTemp
-	stringSignTemp = stringA + "&key=" + key
+	if key != ""{
+		stringSignTemp = stringA + "&key=" + key
+	}
 
 	m.Write([]byte(stringSignTemp))
 
