@@ -6,7 +6,6 @@ import (
 	"crypto/cipher"
 	"crypto/sha1"
 	"encoding/base64"
-	"encoding/binary"
 	"encoding/xml"
 	"fmt"
 	"io"
@@ -118,10 +117,6 @@ func MakeEncryptXmlData(appId, fromUserName, toUserName, timestamp, content stri
 	var (
 		err         error
 		body        []byte
-		bodyLength  []byte
-		plainData   []byte
-		buf         = new(bytes.Buffer)
-		randomBytes = []byte("abcdefghijklmnop")
 	)
 
 	body, err = MakeTextRes(fromUserName, toUserName, timestamp, content)
@@ -129,14 +124,7 @@ func MakeEncryptXmlData(appId, fromUserName, toUserName, timestamp, content stri
 		return "", err
 	}
 
-	err = binary.Write(buf, binary.BigEndian, int32(len(body)))
-	if err != nil {
-		return "", err
-	}
-
-	bodyLength = buf.Bytes()
-	plainData = bytes.Join([][]byte{randomBytes, bodyLength, body, []byte(appId)}, nil)
-	return base64.StdEncoding.EncodeToString(AESEncrypt(plainData, key)), nil
+	return base64.StdEncoding.EncodeToString(AESEncrypt(body, key)), nil
 }
 
 func MakeEncryptRes(appId, token,  fromUserName, toUserName, timestamp, content string, key []byte) ([]byte, error) {
