@@ -2,9 +2,30 @@ package WeChatSDK
 
 import (
 	"encoding/xml"
+	"strings"
 	"testing"
 )
 
+/*
+WDWVSCZABGMBRBQZ  <xml>
+          <ToUserName><![CDATA[ROLL_DEE_ROCK]]></ToUserName>
+          <FromUserName><![CDATA[o8Auv4qR8I8izMQC5vzsNQBSefTc]]></FromUserName>
+          <CreateTime>1586160069</CreateTime>
+          <MsgType><![CDATA[text]]></MsgType>
+          <Content><![CDATA[success]]></Content>
+          <MsgId>1</MsgId>
+        </xml>��;��z�%���	�Ds�9,��Ѳ��
+ */
+
+/*
+  <xml><ToUserName><![CDATA[gh_10f6c3c3ac5a]]></ToUserName>
+        <FromUserName><![CDATA[oyORnuP8q7ou2gfYjqLzSIWZf0rs]]></FromUserName>
+        <CreateTime>1410349438</CreateTime>
+        <MsgType><![CDATA[text]]></MsgType>
+        <Content><![CDATA[abcdteT]]></Content>
+        <MsgId>6057404712141979648</MsgId>
+        </xml>wx2c2769f8efd9abc2
+ */
 func TestDecrypt(t *testing.T) {
 	var (
 		err            error
@@ -35,6 +56,10 @@ func TestDecrypt(t *testing.T) {
 	}
 
 	t.Log(string(result))
+
+	a := strings.Split(string(result), "<xml>")
+
+	t.Log("length: ", len(a[0]))
 
 	var data map[string]interface{}
 

@@ -160,7 +160,7 @@ func MakeTextRes(fromUserName, toUserName, timestamp, content, msgId string) ([]
 	return xml.MarshalIndent(textRes, "", "  ")
 }
 
-func MakeEncryptXmlData(fromUserName, toUserName, timestamp, content, msgId string, key []byte) (string, error) {
+func MakeEncryptXmlData(appId, fromUserName, toUserName, timestamp, content, msgId string, key []byte) (string, error) {
 	var (
 		err        error
 		body       []byte
@@ -169,7 +169,7 @@ func MakeEncryptXmlData(fromUserName, toUserName, timestamp, content, msgId stri
 		plainData  []byte
 		buf        = new(bytes.Buffer)
 	)
-	// random(16B) + msg_len(4B) + msg
+	// random(16B) + msg_len(4B) + msg + appId
 	body, err = MakeTextRes(fromUserName, toUserName, timestamp, content, msgId)
 	if err != nil {
 		return "", err
@@ -182,19 +182,19 @@ func MakeEncryptXmlData(fromUserName, toUserName, timestamp, content, msgId stri
 	bodyLength = buf.Bytes()
 
 	random = []byte(GeneNonceStr(16))
-	plainData = bytes.Join([][]byte{random, bodyLength, body, key}, nil)
+	plainData = bytes.Join([][]byte{random, bodyLength, body, []byte(appId)}, nil)
 
 	return AESEncrypt(plainData, key)
 }
 
-func MakeEncryptRes(token, fromUserName, toUserName, timestamp, content, msgId string, key []byte) ([]byte, error) {
+func MakeEncryptRes(appId, token, fromUserName, toUserName, timestamp, content, msgId string, key []byte) ([]byte, error) {
 	var (
 		err            error
 		encryptXmlData string
 		encryptRes     = new(EncryptRes)
 	)
 
-	encryptXmlData, err = MakeEncryptXmlData(fromUserName, toUserName, timestamp, content, msgId, key)
+	encryptXmlData, err = MakeEncryptXmlData(appId, fromUserName, toUserName, timestamp, content, msgId, key)
 	if err != nil {
 		return nil, err
 	}
