@@ -113,10 +113,10 @@ func MakeTextRes(fromUserName, toUserName, timestamp, content string) ([]byte, e
 	return xml.MarshalIndent(textRes, "", "  ")
 }
 
-func MakeEncryptXmlData(appId, fromUserName, toUserName, timestamp, content string, key []byte) (string, error) {
+func MakeEncryptXmlData(fromUserName, toUserName, timestamp, content string, key []byte) (string, error) {
 	var (
-		err         error
-		body        []byte
+		err  error
+		body []byte
 	)
 
 	body, err = MakeTextRes(fromUserName, toUserName, timestamp, content)
@@ -127,14 +127,14 @@ func MakeEncryptXmlData(appId, fromUserName, toUserName, timestamp, content stri
 	return base64.StdEncoding.EncodeToString(AESEncrypt(body, key)), nil
 }
 
-func MakeEncryptRes(appId, token,  fromUserName, toUserName, timestamp, content string, key []byte) ([]byte, error) {
+func MakeEncryptRes(appId, token, fromUserName, toUserName, timestamp, content string, key []byte) ([]byte, error) {
 	var (
 		err            error
 		encryptXmlData string
 		encryptRes     = new(EncryptRes)
 	)
 
-	encryptXmlData, err = MakeEncryptXmlData(appId, fromUserName, toUserName, timestamp, content, key)
+	encryptXmlData, err = MakeEncryptXmlData(fromUserName, toUserName, timestamp, content, key)
 	if err != nil {
 		return nil, err
 	}
