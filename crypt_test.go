@@ -31,16 +31,9 @@ func TestDecrypt(t *testing.T) {
 		err            error
 		key            []byte
 		result         []byte
-		sEncryptBase64 = "mfBCs65c67CeJw22u4VT2TD73q5H06+ocrAIxswCaeZ/d/Lw" +
-			"0msSZFHY0teqgSYiI1zR2gD2DKrB3TIrmX/liNSDrGqS8jSI/" +
-			"WPeKB5VPr7Ezr7gomZAyGCwJSgT1TRFWPfONGJMxuj2nk4faTu" +
-			"spAuVIFQ6SHwZuJBZC7mcJp7Cgr9cUhATQWDbOPaE7ukZBTV2Yq" +
-			"yzH+UI2AK+J1S47cE79k1RX8t0hcTz/O0hlK8DGXKnvYv88qKQcI" +
-			"7z4iaajqHfRVZKBNyOODabs+It+ZfM3dWTeFcPgDbGtIEnpt/EDtu" +
-			"uA/zMvtkaKdHdswPnVZQ+xdwbYr3ldGvfT8HlEYEgkgKaThxTFobVl" +
-			"wzu2ZkXCjicbP3xdr15Iq48ObgzPpqYuZ3IEoyggZDKClquk0u0orMck4GTF/XyE8yGzc4="
+		sEncryptBase64 = "Bpxiue7Ro9jQFTd+wbcRzq33CkMtFwzz77KX1PuPsPyxAJTK0vsTX9P3kKh8s8DAuiH4xRNCqd2GQNq3LB1kmqFHBz7L7AX4OOHHcCloOK4e8kZdt6uEVNwu084cX9xP7uwwzjvD/9PxUREdy5bQSIHo4d1gDxW6P/SiStcN/zK3nFTE8HvPlX2E0KmY3SZGq4junfjqqlsCa0N3x7YJKXrW5WPwg4GQoq37JYeiqAnKIEDHzlBa41s1JQ7K3lCoKSMHTqqEGpk09jx1C5cq4tqW/0gtm5AHLuwWAvWrYGwcOXVNOddArBvDvsgqTP3wxzMJaNYuE5oDfiLIGtkQiO19bYHo3AKEbmfYnVZShVtDYU2VpSGeayqOgDVE7BoxkRoNgPar6FwQDEi35mb2UJkMeHBgpslXkl4EcteIAes="
 
-		sEncodingAesKey = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFG"
+		sEncodingAesKey = "mgTTO666F3reJYYZiNsIoQnxRHPzOQ8RLMXo0bIC79V"
 	)
 
 	key, err = EncAesKey2AesKey(sEncodingAesKey)
