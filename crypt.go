@@ -182,7 +182,7 @@ func MakeEncryptXmlData(fromUserName, toUserName, timestamp, content, msgId stri
 	bodyLength = buf.Bytes()
 
 	random = []byte(GeneNonceStr(16))
-	plainData = bytes.Join([][]byte{random, bodyLength, body}, nil)
+	plainData = bytes.Join([][]byte{random, bodyLength, body, key}, nil)
 
 	return AESEncrypt(plainData, key)
 }
