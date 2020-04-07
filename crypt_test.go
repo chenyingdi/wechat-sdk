@@ -36,13 +36,9 @@ func TestDecrypt(t *testing.T) {
 		sEncodingAesKey = "mgTTO666F3reJYYZiNsIoQnxRHPzOQ8RLMXo0bIC79V"
 	)
 
-	key, err = EncAesKey2AesKey(sEncodingAesKey)
-	if err != nil {
-		t.Log(err)
-		return
-	}
+	key = EncodingAESKey2AESKey(sEncodingAesKey)
 
-	result, err = AESDecrypt(sEncryptBase64, key)
+	result, err = AesDecrypt([]byte(sEncryptBase64), key)
 	if err != nil{
 		t.Log(err)
 		return
